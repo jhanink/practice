@@ -1,0 +1,14 @@
+
+.sectionContent {position:relative;left:25px; top:15px;}
+
+.sprite {background-image:url('/images/Anime-Girl-Side.png')}
+
+.frame {height:128px;width:128px}
+
+
+.box {
+    border: 1px solid #eee;
+    border-radius: 3px;
+    box-shadow: 10px 10px 5px #999;
+    padding: 10px;
+}

@@ -1,0 +1,27 @@
+<div ng-controller="FeaturesCtrl">
+
+    <h3 class="page-header">Controller</h3>
+
+    <input bootstrap-button type="button" value="get joke" ng-click="getJoke()"/>
+
+    <p>&nbsp;</p>
+
+    <div class="sectionContent" ng-if="data.id">{{data.id}} : {{data.joke}}</div>
+
+
+    <h3 class="page-header">Filter</h3>
+
+    <div class="sectionContent">{{0.35 | percentage}}%</div>
+
+
+    <h3 class="page-header">Sprite</h3>
+
+    <input bootstrap-button type="button" value="animate" ng-click="startAnimate()"/>
+
+    <span>{{frame.xPos}}, {{frame.yPos}} --- {{frame.x}}, {{frame.y}}</span>
+
+
+    <div class="sectionContent sprite frame box" style="background-position:{{frame.x}}px {{frame.y}}px"></div>
+
+
+</div>
