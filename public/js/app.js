@@ -37,68 +37,76 @@ MyApp.controller('MyListCtrl',['$scope', function($scope) {
 
 
 /**
- * ChuckNorrisCtrl (get a random chuck norris joke)
+ * FeaturesCtrl
  */
 MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope, $http, $interval) {
 
-    $scope.animationPromise = null;
-
-    $scope.getAnimateButtonText = function() {
-        return $scope.animationPromise == null ? "animate": "pause";
-    };
-
-    $scope.performAnimationFunction = function() {
-        if ($scope.animationPromise == null) {
-            $scope.startAnimate();
-        } else {
-            $scope.pauseAnimation();
-        }
-    };
-
-    $scope.frame = {
-        x:0,
-        y:0,
-        size:128,
-        getXPos: function() {
-            return -1 * this.x * this.size;
+    $scope.animation = {
+        performAnimation: function() {
+            if (this.animationPromise == null) {
+                this.startAnimation();
+            } else {
+                this.pauseAnimation();
+            }
         },
-        getYPos: function() {
-            return -1 * this.y * this.size;
-        }
+        startAnimation: function() {
+            this.animationPromise = $interval(function() {
+                $scope.animation.animateSprite();
+            },this.getAnimationSpeed());
+        },
+        pauseAnimation: function() {
+            $interval.cancel(this.animationPromise);
+            this.animationPromise = null;
+        },
+        restartAnimation: function() {
+            this.pauseAnimation();
+            this.startAnimation();
+        },
+        animateSprite: function() {
+            if ( (this.frame.x < 7 && this.frame.y < 4)
+                || (this.frame.x < 4 && this.frame.y == 4) ) {
+                this.frame.x++;
+            } else {
+                this.frame.x = 0;
+
+                if (this.frame.y < 5) {
+                    this.frame.y++;
+                } else {
+                    this.frame.y = 0;
+                    this.frame.x = 1;
+                }
+            }
+        },
+        animationPromise:null,
+        getAnimationButtonText: function() {
+            return this.animationPromise == null ? "animate": "pause";
+        },
+        getAnimationSpeed: function() {
+            if (!this.animationSpeed || this.animationSpeed.trim() == "") {
+                return 40;
+            } else {
+                return this.animationSpeed;
+            }
+        },
+        frame: {
+            x:0,
+            y:0,
+            size:128,
+            getXPos: function() {
+                return -1 * this.x * this.size;
+            },
+            getYPos: function() {
+                return -1 * this.y * this.size;
+            }
+        },
+        animationSpeed: null
     };
+
 
     $scope.getJoke = function() {
         $http.get('/joke/chuckNorris').success(function(data) {
             $scope.data = data;
         });
-    };
-
-    $scope.startAnimate = function() {
-        $scope.animationPromise = $interval(function() {
-            $scope.animateSprite();
-        },40);
-    };
-
-    $scope.pauseAnimation = function() {
-        $interval.cancel($scope.animationPromise);
-        $scope.animationPromise = null;
-    };
-
-    $scope.animateSprite = function() {
-
-        if ( ($scope.frame.x < 7 && $scope.frame.y < 4)
-            || ($scope.frame.x < 4 && $scope.frame.y == 4) ) {
-            $scope.frame.x++;
-        } else {
-            $scope.frame.x = 0;
-
-            if ($scope.frame.y < 5) {
-                $scope.frame.y++;
-            } else {
-                $scope.frame.y = 0;
-                $scope.frame.x = 1;
-            }
-        }
     };
 
 }]);
