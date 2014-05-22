@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var router = express.Router();
 
-// for all requests - like any middle
+// for all requests - like any other middleware
 router.use(function(req,res,next) {
     next();
 });
@@ -39,8 +39,6 @@ var service = {
                 return deferred.resolve(err);
             }
 
-            console.log (res.statusCode);
-
             var json = JSON.parse(res.body);
             return deferred.resolve(json);
 
@@ -54,13 +52,10 @@ var service = {
 
 
 router.get('/joke/chuckNorris', function(req,res) {
-
-    service.getChuckNorrisJoke()
-        .then(function(data) {
-            res.send(data.value);
-        });
+    service.getChuckNorrisJoke().then(function(data) {
+        res.send(data.value);
+    });
 });
-
 
 // apply router to all requests
 app.use('/', router);

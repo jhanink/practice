@@ -16,12 +16,11 @@
 
     <h3 class="page-header">Sprite</h3>
 
-    <input bootstrap-button type="button" value="animate" ng-click="startAnimate()"/>
+    <input bootstrap-button type="button" value="{{getAnimateButtonText()}}" ng-click="performAnimationFunction()"/>
 
-    <span>{{frame.xPos}}, {{frame.yPos}} --- {{frame.x}}, {{frame.y}}</span>
+    <span>{{frame.x}}, {{frame.y}} --- {{frame.getXPos()}}, {{frame.getYPos()}}</span>
 
-
-    <div class="sectionContent sprite frame box" style="background-position:{{frame.x}}px {{frame.y}}px"></div>
+    <div class="sectionContent sprite frame box" style="background-position:{{frame.getXPos()}}px {{frame.getYPos()}}px"></div>
 
 
 </div>

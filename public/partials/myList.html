@@ -1,0 +1,14 @@
+<div ng-controller="MyListCtrl">
+
+    <input type="text" id="entryfield" ng-model="entryfield"/>
+    <br/>
+    <input type="button" value="Submit" ng-click="handleSubmit()"/>
+
+    <p/>
+
+    <ul ng-repeat="item in sortedList | orderBy: 'val' : true">
+        <li>{{item.key}} {{item.val}} </li>
+    </ul>
+
+</div>
+

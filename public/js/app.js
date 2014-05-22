@@ -4,7 +4,35 @@ var MyApp = angular.module('MyApp', ['ngRoute','ui.bootstrap']);
 
 MyApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/features', {templateUrl: 'partials/features.html', controller: 'FeaturesCtrl'});
+    $routeProvider.when('/mylist', {templateUrl: 'partials/myList.html', controller: 'MyListCtrl'});
     $routeProvider.otherwise({redirectTo: '/features'})
+}]);
+
+
+MyApp.controller('MyListCtrl',['$scope', function($scope) {
+
+    $scope.entryfield = '';
+
+    $scope.collection = {};
+    $scope.sortedList = [];
+
+    $scope.handleSubmit = function() {
+        var val = document.getElementById('entryfield').value;
+        var item = $scope.collection[val];
+
+        if (item) {
+            $scope.collection[val]++;
+        } else {
+            $scope.collection[val] = 1;
+        }
+
+        $scope.sortedList = [];
+
+        for (var i in $scope.collection) {
+            $scope.sortedList.push( {key:i, val:$scope.collection[i]} );
+        }
+    }
+
 }]);
 
 
@@ -13,7 +41,32 @@ MyApp.config(['$routeProvider', function($routeProvider) {
  */
 MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope, $http, $interval) {
 
+    $scope.animationPromise = null;
+
+    $scope.getAnimateButtonText = function() {
+        return $scope.animationPromise == null ? "animate": "pause";
+    };
+
+    $scope.performAnimationFunction = function() {
+        if ($scope.animationPromise == null) {
+            $scope.startAnimate();
+        } else {
+            $scope.pauseAnimation();
+        }
+    };
+
     $scope.frame = {
+        x:0,
+        y:0,
+        size:128,
+        getXPos: function() {
+            return -1 * this.x * this.size;
+        },
+        getYPos: function() {
+            return -1 * this.y * this.size;
+        }
+    };
+/*    $scope.frame = {
         x:0,
         y:0,
         xMax:7,
@@ -22,7 +75,7 @@ MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope
         size:128,
         xPos:0,
         yPos:0
-    };
+    };*/
 
     $scope.getJoke = function() {
         $http.get('/joke/chuckNorris').success(function(data) {
@@ -31,14 +84,34 @@ MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope
     };
 
     $scope.startAnimate = function() {
-        $interval(function() {
+        $scope.animationPromise = $interval(function() {
             $scope.animateSprite();
-        },1200);
+        },50);
+    };
+
+    $scope.pauseAnimation = function() {
+        $interval.cancel($scope.animationPromise);
+        $scope.animationPromise = null;
     };
 
     $scope.animateSprite = function() {
 
-        if (($scope.frame.xPos < $scope.frame.xMax) ||
+        if ( ($scope.frame.x < 7 && $scope.frame.y < 4)
+            || ($scope.frame.x < 4 && $scope.frame.y == 4) ) {
+            $scope.frame.x++;
+        } else {
+            $scope.frame.x = 0;
+
+            if ($scope.frame.y < 5) {
+                $scope.frame.y++;
+            } else {
+                $scope.frame.y = 0;
+                $scope.frame.x = 1;
+            }
+        }
+
+
+/*        if (($scope.frame.xPos < $scope.frame.xMax) ||
             (($scope.frame.yPos == $scope.frame.yMax-1) && ($scope.frame.xPos < $scope.frame.xMaxLimit))) {
             $scope.frame.xPos++;
             $scope.frame.x -= $scope.frame.size;
@@ -59,7 +132,7 @@ MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope
         } else {
             $scope.frame.x = 0;
             $scope.frame.y -= $scope.frame.size;
-        }
+        }*/
 
     };
 
