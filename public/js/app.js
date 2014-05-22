@@ -66,16 +66,6 @@ MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope
             return -1 * this.y * this.size;
         }
     };
-/*    $scope.frame = {
-        x:0,
-        y:0,
-        xMax:7,
-        yMax:5,
-        xMaxLimit:5,
-        size:128,
-        xPos:0,
-        yPos:0
-    };*/
 
     $scope.getJoke = function() {
         $http.get('/joke/chuckNorris').success(function(data) {
