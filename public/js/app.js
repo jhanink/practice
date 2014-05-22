@@ -86,7 +86,7 @@ MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope
     $scope.startAnimate = function() {
         $scope.animationPromise = $interval(function() {
             $scope.animateSprite();
-        },50);
+        },40);
     };
 
     $scope.pauseAnimation = function() {
@@ -109,31 +109,6 @@ MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope
                 $scope.frame.x = 1;
             }
         }
-
-
-/*        if (($scope.frame.xPos < $scope.frame.xMax) ||
-            (($scope.frame.yPos == $scope.frame.yMax-1) && ($scope.frame.xPos < $scope.frame.xMaxLimit))) {
-            $scope.frame.xPos++;
-            $scope.frame.x -= $scope.frame.size;
-        } else {
-            $scope.frame.xPos = 0;
-            $scope.frame.x = 0;
-            if ($scope.frame.yPos < $scope.frame.yMax) {
-                $scope.frame.yPos++;
-                $scope.frame.y -= $scope.frame.size;
-            } else {
-                $scope.frame.yPos = 0;
-                $scope.frame.y = 0;
-            }
-        }
-
-        if ($scope.frame.x > -($scope.frame.xMax * $scope.frame.size)) {
-            $scope.frame.x -= $scope.frame.size;
-        } else {
-            $scope.frame.x = 0;
-            $scope.frame.y -= $scope.frame.size;
-        }*/
-
     };
 
 }]);

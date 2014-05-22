@@ -18,9 +18,20 @@
 
     <input bootstrap-button type="button" value="{{getAnimateButtonText()}}" ng-click="performAnimationFunction()"/>
 
-    <span>{{frame.x}}, {{frame.y}} --- {{frame.getXPos()}}, {{frame.getYPos()}}</span>
+    <p>&nbsp;</p>
 
     <div class="sectionContent sprite frame box" style="background-position:{{frame.getXPos()}}px {{frame.getYPos()}}px"></div>
+
+
+
+    <p>&nbsp;</p>
+
+    <ul class="sectionContent">
+        <li>x: {{frame.x}}</li>
+        <li>y: {{frame.y}}</li>
+        <li>xPos: {{frame.getXPos()}}</li>
+        <li>yPos: {{frame.getYPos()}}</li>
+    </ul>
 
 
 </div>
