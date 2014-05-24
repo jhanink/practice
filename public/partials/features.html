@@ -9,16 +9,18 @@
     <div class="sectionContent" ng-if="data.id">{{data.id}} : {{data.joke}}</div>
 
 
+<!--
     <h3 class="page-header">Filter</h3>
 
     <div class="sectionContent">{{0.35 | percentage}}%</div>
+-->
 
 
     <h3 class="page-header">Sprite</h3>
 
     <form class="form-inline">
         <input bootstrap-button type="button" value="{{animation.getAnimationButtonText()}}" ng-click="animation.performAnimation()" style="width:75px"/>
-        <input class="form-control" style="width:65px;height:30px;background-color:yellow" type="text" ng-model="animation.animationSpeed" placeholder="speed" ng-change="animation.restartAnimation()" style="float:left;margin-right:5px"/>
+        <input class="form-control" style="width:65px;height:30px;background-color:#EEE" type="text" ng-model="animation.animationSpeed" placeholder="speed" ng-change="animation.restartAnimation()" style="float:left;margin-right:5px"/>
     </form>
 
     <p>&nbsp;</p>
@@ -35,6 +37,10 @@
         <li>xPos: {{animation.frame.getXPos()}}</li>
         <li>yPos: {{animation.frame.getYPos()}}</li>
     </ul>
+
+    <p>&nbsp;</p>
+
+    <a href="http://plnkr.co/edit/xjSJa6h2m9bfqUAb7kvv?p=preview">http://plnkr.co/edit/xjSJa6h2m9bfqUAb7kvv?p=preview</a>
 
 
 </div>
