@@ -17,19 +17,19 @@ MyApp.controller('MyListCtrl',['$scope', function($scope) {
     $scope.sortedList = [];
 
     $scope.handleSubmit = function() {
-        var val = document.getElementById('entryfield').value;
-        var item = $scope.collection[val];
+        var text = document.getElementById('entryfield').value;
+        var item = $scope.collection[text];
 
         if (item) {
-            $scope.collection[val]++;
+            $scope.collection[text]++;
         } else {
-            $scope.collection[val] = 1;
+            $scope.collection[text] = 1;
         }
 
         $scope.sortedList = [];
 
         for (var i in $scope.collection) {
-            $scope.sortedList.push( {key:i, val:$scope.collection[i]} );
+            $scope.sortedList.push( {text:i, count:$scope.collection[i]} );
         }
     }
 
@@ -79,7 +79,7 @@ MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope
         },
         animationPromise:null,
         getAnimationButtonText: function() {
-            return this.animationPromise == null ? "animate": "pause";
+            return this.animationPromise == null ? "Animate": "Pause";
         },
         getAnimationSpeed: function() {
             if (!this.animationSpeed || this.animationSpeed.trim() == "") {

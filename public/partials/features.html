@@ -17,7 +17,8 @@
     <h3 class="page-header">Sprite</h3>
 
     <form class="form-inline">
-        <input bootstrap-button type="button" value="{{animation.getAnimationButtonText()}}" ng-click="animation.performAnimation()"/> <input class="form-control"  style="width:75px" type="text" ng-model="animation.animationSpeed" placeholder="speed" ng-change="animation.restartAnimation()"/>
+        <input bootstrap-button type="button" value="{{animation.getAnimationButtonText()}}" ng-click="animation.performAnimation()" style="width:75px"/>
+        <input class="form-control" style="width:65px;height:30px;background-color:yellow" type="text" ng-model="animation.animationSpeed" placeholder="speed" ng-change="animation.restartAnimation()" style="float:left;margin-right:5px"/>
     </form>
 
     <p>&nbsp;</p>
@@ -37,3 +38,5 @@
 
 
 </div>
+
+<div style="margin-bottom:100px"></div>
