@@ -31,27 +31,22 @@ router.get('/', function(req,res) {
 var service = {
     getChuckNorrisJoke: function() {
         var deferred = when.defer();
-
         request('http://api.icndb.com/jokes/random', function(err, res){
-
             if (err) {
                 console.log(err);
                 return deferred.resolve(err);
             }
-
             var json = JSON.parse(res.body);
             return deferred.resolve(json);
-
         });
         return deferred.promise;
     }
-
 };
 // ------------------------------------------
 
 
 
-router.get('/joke/chuckNorris', function(req,res) {
+router.get('/joke/chuckNorris', function(req, res) {
     service.getChuckNorrisJoke().then(function(data) {
         res.send(data.value);
     });
