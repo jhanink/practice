@@ -41,6 +41,12 @@ MyApp.controller('MyListCtrl',['$scope', function($scope) {
  */
 MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope, $http, $interval) {
 
+    $scope.getJoke = function() {
+        $http.get('/joke/chuckNorris').success(function(data) {
+            $scope.data = data;
+        });
+    };
+
     $scope.animation = {
         performAnimation: function() {
             if (this.animationPromise == null) {
@@ -102,13 +108,6 @@ MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope
         animationSpeed: null
     };
 
-
-    $scope.getJoke = function() {
-        $http.get('/joke/chuckNorris').success(function(data) {
-            $scope.data = data;
-        });
-    };
-
 }]);
 
 
@@ -136,8 +135,6 @@ var bindFunction = function(fn, obj) {
         return fn.apply(obj, fn);
     }
 };
-
-
 
 
 if (!String.prototype.trim) {
