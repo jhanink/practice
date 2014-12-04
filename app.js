@@ -61,5 +61,5 @@ router.get('/joke/chuckNorris', function(req,res) {
 app.use('/', router);
 
 http.createServer(app).listen(config.port, function() {
-    console.log("server running on port 8000");
+    console.log("server running on port " + config.port);
 });
