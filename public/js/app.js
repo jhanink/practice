@@ -12,7 +12,6 @@ MyApp.config(['$routeProvider', function($routeProvider) {
 MyApp.controller('MyListCtrl',['$scope', function($scope) {
 
     $scope.entryfield = '';
-
     $scope.collection = {};
     $scope.sortedList = [];
 
@@ -95,9 +94,9 @@ MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope
             }
         },
         frame: {
-            x:0,
-            y:0,
-            size:128,
+            x: 0,
+            y: 0,
+            size: 128,
             getXPos: function() {
                 return -1 * this.x * this.size;
             },

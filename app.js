@@ -45,7 +45,6 @@ var service = {
 // ------------------------------------------
 
 
-
 router.get('/joke/chuckNorris', function(req, res) {
     service.getChuckNorrisJoke().then(function(data) {
         res.send(data.value);
