@@ -52,7 +52,7 @@ MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope
         startAnimation: function() {
             this.animationPromise = $interval(function() {
                 $scope.animation.animateSprite();
-            },this.getAnimationSpeed());
+            },this.getWaitTime());
         },
         pauseAnimation: function() {
             $interval.cancel(this.animationPromise);
@@ -81,7 +81,7 @@ MyApp.controller('FeaturesCtrl', ['$scope','$http', '$interval', function($scope
         getAnimationButtonText: function() {
             return this.animationPromise == null ? "Animate": "Pause";
         },
-        getAnimationSpeed: function() {
+        getWaitTime: function() {
             if (!this.animationSpeed || this.animationSpeed.trim() == "") {
                 return 40;
             } else {
@@ -130,14 +130,9 @@ MyApp.filter('percentage', function() {
     };
 });
 
-
-var bindFunction = function(fn, obj) {
-    return function() {
-        return fn.apply(obj, fn);
-    }
+var bindFunction = function(f, obj) {
+    return function() {return f.apply(obj, arguments);}
 };
-
-
 
 
 if (!String.prototype.trim) {
